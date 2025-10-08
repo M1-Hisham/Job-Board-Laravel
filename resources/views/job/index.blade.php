@@ -1,5 +1,7 @@
+@extends('layouts.app')
 
-<div style="text-align: center;">
+@section('title', 'Job Listings')
+@section('content')<div style="text-align: center;">
 
     <h1>Job Listings</h1>
     <p>Welcome to the job board! Here are the latest job postings:</p>
@@ -22,3 +24,6 @@
     @endforeach
 
 </div>
+
+
+@endsection
