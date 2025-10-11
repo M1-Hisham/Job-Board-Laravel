@@ -13,7 +13,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $data = Post::all();
+        return view("post/posts", ["posts"=> $data]);
     }
 
     /**
@@ -21,7 +22,14 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+       Post::create([
+        'title' => 'Sample Post Title',
+        'author' => 'Author Name',
+        'author2' => 'Co-Author Name',
+        'body' => 'This is the body of the sample post.',
+        'poblished' => true,
+       ]);
+       return redirect('/post');
     }
 
     /**
@@ -35,13 +43,14 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Post $post)
+    public function show($id)
     {
-        //
+        $data = Post::findOrFail($id);
+        return view('post/view', ['posts'=> $data]);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing  the specified resource.
      */
     public function edit(Post $post)
     {
@@ -59,8 +68,11 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Post $post)
+    public function destroy($id)
     {
-        //
+        // delete the post
+        $post = Post::find($id);
+        $post->delete();
+        return redirect('/post');
     }
 }

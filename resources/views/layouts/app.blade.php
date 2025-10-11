@@ -6,7 +6,8 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<body>
+<!-- dark theme -->
+<body class="bg-gray-900 text-white">
 
     {{-- الهيدر --}}
     <!-- @include('partials.header') -->

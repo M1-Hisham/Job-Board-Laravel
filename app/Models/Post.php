@@ -7,9 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    ///** @use HasFactory<\Database\Factories\PostFactory> */
-    // use HasFactory;
+
+    protected $table = 'posts';
+    
     protected $fillable = ['title', 'author', 'author2', 'body', 'poblished'];
 
 
+    protected $guarded = ['id'];
+
+    public function comments()
+    {
+        return $this->hasMany(comment::class);
+    }
 }
