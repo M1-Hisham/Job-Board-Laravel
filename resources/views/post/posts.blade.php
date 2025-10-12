@@ -20,8 +20,8 @@
     <!-- i want to display button to delete the post and view the post details -->
 
         <div>
-            <h2>{{ $post['title'] }}</h2>
-            <p>{{ $post['body'] }}</p>
+            <p><strong>Title:</strong><h1>{{ $post['title'] }}</h1></p>
+            <p><strong>Body:</strong><h2>{{ $post['body'] }}</h2></p>
             <p><strong>Author:</strong> {{ $post['author'] }}</p>
             <p><strong>Co-Author:</strong> {{ $post['author2'] }}</p>
             <p><strong>Published on:</strong> {{ $post['poblished'] }}</p>
@@ -37,5 +37,9 @@
         </div>
     
     @endforeach
+    <!-- pagination links -->
+    <div style="margin-top: 20px;">
+        {{ $posts->links() }}
+        
 </div>
 @endsection

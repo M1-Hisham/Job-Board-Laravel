@@ -8,6 +8,7 @@ use App\Models\comment;
 
 class CommentController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
@@ -23,11 +24,12 @@ class CommentController extends Controller
      */
     public function create()
     {
-        comment::create([
-            'content' => 'This is a sample comment body.',
-            'author' => 'Commenter Name',
-            'post_id' => 5,
-           ]);
+        // comment::create([
+        //     'content' => 'This is a sample comment body.',
+        //     'author' => 'Commenter Name',
+        //     'post_id' => 5,
+        //    ]);
+        Comment::factory()->count(3)->create();
            return redirect('/comments');
 
     }

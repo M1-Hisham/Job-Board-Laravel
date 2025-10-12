@@ -3,8 +3,8 @@
 
 @section ('content')
 <div style="text-align: center;">
-    <h1>{{ $posts['title'] }}</h1>
-    <p>{{ $posts['body'] }}</p>
+    <p><strong>Title:</strong><h1>{{ $posts['title'] }}</h1></p>
+    <p><strong>Body:</strong><h2>{{ $posts['body'] }}</h2></p>
     <p><strong>Author:</strong> {{ $posts['author'] }}</p>
     <p><strong>Co-Author:</strong> {{ $posts['author2'] }}</p>
     <p><strong>Published on:</strong> {{ $posts['poblished'] }}</p>

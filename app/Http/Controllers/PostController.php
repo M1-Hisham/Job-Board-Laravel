@@ -13,8 +13,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $data = Post::all();
-        return view("post/posts", ["posts"=> $data]);
+        $data = Post::cursorPaginate(5);
+        return view("post/posts", ["posts" => $data]);
     }
 
     /**
@@ -22,14 +22,15 @@ class PostController extends Controller
      */
     public function create()
     {
-       Post::create([
-        'title' => 'Sample Post Title',
-        'author' => 'Author Name',
-        'author2' => 'Co-Author Name',
-        'body' => 'This is the body of the sample post.',
-        'poblished' => true,
-       ]);
-       return redirect('/post');
+        //    Post::create([
+        //     'title' => 'Sample Post Title',
+        //     'author' => 'Author Name',
+        //     'author2' => 'Co-Author Name',
+        //     'body' => 'This is the body of the sample post.',
+        //     'poblished' => true,
+        //    ]);
+        Post::factory()->count(1)->create();
+        return redirect('/post');
     }
 
     /**
@@ -46,7 +47,7 @@ class PostController extends Controller
     public function show($id)
     {
         $data = Post::findOrFail($id);
-        return view('post/view', ['posts'=> $data]);
+        return view('post/view', ['posts' => $data]);
     }
 
     /**
