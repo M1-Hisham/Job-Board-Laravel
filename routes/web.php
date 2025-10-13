@@ -12,3 +12,6 @@ Route::get('/contact', [IndexController::class, 'contact']);
 
 Route::get('/job', [JobController::class, 'index']);
 
+Route::resource('/post', PostController::class);
+
+Route::resource('comments', CommentController::class);

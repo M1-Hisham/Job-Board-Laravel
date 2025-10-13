@@ -27,10 +27,10 @@
             <p><strong>Published on:</strong> {{ $post['poblished'] }}</p>
             <p><strong>ID:</strong> {{ $post['id'] }}</p>
             <!-- Delete button color black go to route post/delete/id-->
-            <form action="{{ route('post.delete', $post['id']) }}" method="POST" style="display: inline;">
+            <form action="{{ route('post.destroy', $post['id']) }}" method="POST" style="display: inline;">
                 @csrf
                 @method('DELETE')
-                <button type="submit" onclick="return confirm('Are you sure you want to delete this post?');" style="background-color: red; color: whit; border: none; padding: 5px 10px; cursor: pointer;">Delete</button>
+                <button type="submit" onclick="return confirm('Are you sure you want to delete this post?');" style="background-color: red; color: white; border: none; padding: 5px 10px; cursor: pointer;">Delete</button>
             </form>
             <a href="/post/{{ $post['id'] }}" style="background-color: blue; color: white; border: none; padding: 5px 10px; text-decoration: none; cursor: pointer;">View Details</a>
             <hr>

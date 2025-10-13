@@ -14,8 +14,7 @@ class PostController extends Controller
     public function index()
     {
         $data = Post::cursorPaginate(5);
-        return response()->json($data);
-        //view("post/posts", ["posts" => $data]);
+        return view("post/posts", ["posts" => $data]);
     }
 
     /**
@@ -48,8 +47,7 @@ class PostController extends Controller
     public function show($id)
     {
         $data = Post::findOrFail($id);
-        return response()->json($data);
-        //view('post/view', ['posts' => $data]);
+        return view('post/view', ['posts' => $data]);
     }
 
     /**
@@ -76,7 +74,6 @@ class PostController extends Controller
         // delete the post
         $post = Post::find($id);
         $post->delete();
-        return response()->json(['message' => 'Post deleted successfully'], 204);
-        //redirect('/post');
+        return redirect('/post');
     }
 }
