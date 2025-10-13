@@ -15,7 +15,8 @@ class CommentController extends Controller
     public function index()
     {
         $comments = Comment::all();
-        return view('comments.index', compact('comments'));
+        return response()->json($comments);
+        //view('comments.index', compact('comments'));
 
     }
 
@@ -29,8 +30,9 @@ class CommentController extends Controller
         //     'author' => 'Commenter Name',
         //     'post_id' => 5,
         //    ]);
-        Comment::factory()->count(3)->create();
-           return redirect('/comments');
+        Comment::factory()->count(2)->create();
+        return response()->json(['message' => 'Comments created successfully'], 201);
+        //redirect('/comments');
 
     }
 
@@ -69,8 +71,10 @@ class CommentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(comment $comment)
+    public function destroy($id)
     {
-        //
+        $comment = Comment::find($id);
+        $comment->delete();
+        return response()->json(['message' => 'Comment deleted successfully'], 204);
     }
 }

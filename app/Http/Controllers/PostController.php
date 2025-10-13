@@ -14,7 +14,8 @@ class PostController extends Controller
     public function index()
     {
         $data = Post::cursorPaginate(5);
-        return view("post/posts", ["posts" => $data]);
+        return response()->json($data);
+        //view("post/posts", ["posts" => $data]);
     }
 
     /**
@@ -29,7 +30,7 @@ class PostController extends Controller
         //     'body' => 'This is the body of the sample post.',
         //     'poblished' => true,
         //    ]);
-        Post::factory()->count(1)->create();
+        Post::factory()->count(5)->create();
         return redirect('/post');
     }
 
@@ -47,7 +48,8 @@ class PostController extends Controller
     public function show($id)
     {
         $data = Post::findOrFail($id);
-        return view('post/view', ['posts' => $data]);
+        return response()->json($data);
+        //view('post/view', ['posts' => $data]);
     }
 
     /**
@@ -74,6 +76,7 @@ class PostController extends Controller
         // delete the post
         $post = Post::find($id);
         $post->delete();
-        return redirect('/post');
+        return response()->json(['message' => 'Post deleted successfully'], 204);
+        //redirect('/post');
     }
 }
