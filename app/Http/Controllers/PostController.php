@@ -13,7 +13,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $data = Post::cursorPaginate(5);
+        $data = Post::latest()->cursorPaginate(5);
         return view("post/posts", ["posts" => $data]);
     }
 
@@ -74,6 +74,6 @@ class PostController extends Controller
         // delete the post
         $post = Post::find($id);
         $post->delete();
-        return redirect('/post');
+        return redirect('/post')->with('success', 'Post deleted successfully.');
     }
 }

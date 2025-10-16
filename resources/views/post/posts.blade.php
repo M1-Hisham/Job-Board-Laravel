@@ -15,6 +15,13 @@
     <a href="/post/create" style="background-color: green; color: white;
         border: none; padding: 5px 5px; text-decoration: none; cursor: pointer;">Create New Post</a>
     <br><br>
+
+    <!-- deley 100s, then display success message if session has success -->
+    @if (session('success'))
+        <div style="background-color: #d4edda; color: #155724; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
+            {{ session('success') }}
+        </div>
+    @endif
     
     @foreach ($posts as $post)
     <!-- i want to display button to delete the post and view the post details -->
