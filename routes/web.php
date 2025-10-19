@@ -5,13 +5,28 @@ use App\Http\Controllers\JobController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\auth\AuthController;
+
+// ## Public Routes
+// Authentication Routes
+Route::get("/signup", [AuthController::class, 'showSignupForm'])->name('signup');
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/signup', [AuthController::class, 'signup']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/', [IndexController::class, 'index']);
 Route::get('/about', [IndexController::class, 'about']);
 Route::get('/contact', [IndexController::class, 'contact']);
 
-Route::get('/job', [JobController::class, 'index']);
+Route::middleware('test')->group(function () {
+    Route::get('/job', [JobController::class, 'index']);
+});
 
-Route::resource('/post', PostController::class);
+// ## Protected Routes
+Route::middleware('auth')->group(function () {
+    Route::resource('/post', PostController::class);
+    Route::resource('comments', CommentController::class);
+});
 
-Route::resource('comments', CommentController::class);
+
