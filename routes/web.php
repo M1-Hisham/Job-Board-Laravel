@@ -25,7 +25,24 @@ Route::middleware('test')->group(function () {
 
 // ## Protected Routes
 Route::middleware('auth')->group(function () {
-    Route::resource('/post', PostController::class);
+    //// Route::resource('/post', PostController::class);
+    // Viewer, Editor, Admin Routes Roles
+    Route::middleware('role:viewer,editor,admin')->group(function () {
+        Route::get('/post', [PostController::class, 'index']);
+        Route::get('/post/{id}/view', [PostController::class, 'show']);
+    });
+
+    // Editor, Admin Routes Roles
+    Route::middleware('role:editor,admin')->group(function () {
+        Route::get('/post/create', [PostController::class, 'create']);
+    });
+
+    // Admin Routes Roles
+    Route::middleware('role:admin')->group(function () {
+        Route::delete('post/{id}/destory', [PostController::class, 'destroy'])->name('post.destroy');
+    });
+
+    ////
     Route::resource('comments', CommentController::class);
 });
 
