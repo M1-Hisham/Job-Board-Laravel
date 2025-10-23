@@ -33,7 +33,9 @@ class PostApiController extends Controller
         $post->author2 = $request->input('author2');
         $post->body = $request->input('body');
         $post->poblished = $request->has('poblished');
+        $post->user_id = $request->user()->id;
         // $post->poblished = $request->input('poblished', false);
+
         $post->save();
 
         return response()->json($post, 201);
@@ -56,26 +58,32 @@ class PostApiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Post $post)
     {
-        $data = Post::find($id);
-        $data->update($request->all());
-        if (!$data) {
+        // $data = Post::find($id);
+        $post->update($request->all());
+        if (!$post) {
             return response()->json(['message' => 'Post not found'], 404);
         }
-        return response()->json($data, 200);
+        return response()->json($post, 200);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Post $post)
     {
-        $data = Post::find($id);
-        $data->delete();
-        if (!$data) {
+        /// policy check
+
+
+        // $data = Post::find($id);
+        $post->delete();
+        if (!$post) {
             return response()->json(['message' => 'Post not found'], 404);
         }
-        return response()->json(null, 204);
+        // send message delete success
+        return response()->json(['message' => 'Delete Success']);
+        //204 No Content
+        // return response()->json(null, 204);
     }
 }
