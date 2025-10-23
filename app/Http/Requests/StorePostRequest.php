@@ -22,11 +22,6 @@ class StorePostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // 'title' => 'Sample Post Title',
-        //     'author' => 'Author Name',
-        //     'author2' => 'Co-Author Name',
-        //     'body' => 'This is the body of the sample post.',
-        //     'poblished' => true,
         'title' => 'bail|required|unique:posts,title,{$this->input("id")}',
         'author' => 'bail|required|string|max:255|',
         'author2' => 'nullable|string|max:255',

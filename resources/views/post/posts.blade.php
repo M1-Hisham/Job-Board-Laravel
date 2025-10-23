@@ -16,7 +16,7 @@
     @if ($userRole === 'admin' || $userRole === 'editor')
         <!-- create button to create new post -->
         <a href="/post/create" style="background-color: green; color: white;
-                border: none; padding: 5px 5px; text-decoration: none; cursor: pointer;">Create New Post</a>
+                        border: none; padding: 5px 5px; text-decoration: none; cursor: pointer;">Create New Post</a>
         <br><br>
     @endif
 
@@ -34,6 +34,12 @@
             <p><strong>Title:</strong>
             <h1>{{ $post['title'] }}</h1>
             </p>
+            <p><strong>USER:</strong>
+            <h1>{{ $post['user_id'] }}</h1>
+            </p>
+            <p><strong>USER NAME:</strong>
+            <h1>{{ $post->user->name }}</h1>
+            </p>
             <p><strong>Body:</strong>
             <h2>{{ $post['body'] }}</h2>
             </p>
@@ -45,7 +51,7 @@
             <form action="{{ route('post.destroy', $post['id']) }}" method="POST" style="display: inline;">
                 @csrf
                 @method('DELETE')
-                @if ($userRole === 'admin')
+                @if ($userRole === 'admin' || Auth::user()->id === $post['user_id'] && $userRole === 'editor')
                     <button type="submit" onclick="return confirm('Are you sure you want to delete this post?');"
                         style="background-color: red; color: white; border: none; padding: 5px 10px; cursor: pointer;">Delete</button>
                 @endif

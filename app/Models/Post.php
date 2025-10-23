@@ -11,7 +11,7 @@ class Post extends Model
     use HasFactory;
     protected $table = 'posts';
 
-    protected $fillable = ['title', 'author', 'author2', 'body', 'poblished'];
+    protected $fillable = ['title', 'author', 'author2', 'body', 'poblished', 'user_id'];
 
 
     protected $guarded = ['id'];
@@ -19,5 +19,10 @@ class Post extends Model
     public function comments()
     {
         return $this->hasMany(comment::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

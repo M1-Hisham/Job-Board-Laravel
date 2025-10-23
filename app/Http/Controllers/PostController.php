@@ -29,7 +29,7 @@ class PostController extends Controller
         //     'body' => 'This is the body of the sample post.',
         //     'poblished' => true,
         //    ]);
-        Post::factory()->count(5)->create();
+        Post::factory()->count(2)->create();
         return redirect('/post');
     }
 
@@ -69,10 +69,10 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        // delete the post
-        $post = Post::find($id);
+        /// delete the post
+        // $post = Post::find($id);
         $post->delete();
         return redirect('/post')->with('success', 'Post deleted successfully.');
     }

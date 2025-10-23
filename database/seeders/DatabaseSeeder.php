@@ -29,5 +29,12 @@ class DatabaseSeeder extends Seeder
             'role' => 'editor',
             'password' => Hash::make('password123'),
         ]);
+
+        User::factory()->create([
+            'name' => 'Editor User 22',
+            'email' => 'editor22@editor.com',
+            'role' => 'editor',
+            'password' => Hash::make('password123'),
+        ]);
     }
 }

@@ -38,8 +38,12 @@ Route::middleware('auth')->group(function () {
     });
 
     // Admin Routes Roles
-    Route::middleware('role:admin')->group(function () {
-        Route::delete('post/{id}/destory', [PostController::class, 'destroy'])->name('post.destroy');
+    Route::middleware('role:admin,editor')->group(function () {
+        Route::delete('post/{post}/destory', [PostController::class, 'destroy'])->name('post.destroy');
+        ///this is post policy check.
+        //->can('delete', 'post');
+        /// OR.
+        //Route::middleware('can:delete,post')->group(function () {}
     });
 
     ////
